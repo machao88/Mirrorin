@@ -1,4 +1,4 @@
-package com.example.mirrorin;
+package com.mc.mirrorin;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

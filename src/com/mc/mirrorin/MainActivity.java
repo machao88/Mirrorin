@@ -1,10 +1,12 @@
-package com.example.mirrorin;
+package com.mc.mirrorin;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import com.example.mirrorin.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -98,25 +100,28 @@ public class MainActivity extends Activity implements OnClickListener {
 		}*/
 		
 		try {
-			Process p = Runtime.getRuntime().exec("/system/bin/screencap -p /mnt/sdcard/c.png  \n");
+			Process p = Runtime.getRuntime().exec("su");
+
+			DataOutputStream dos = new DataOutputStream(p.getOutputStream());
+			String cmd = "/system/bin/screencap -p /mnt/sdcard/c.png";
+			dos.writeBytes(cmd  + "\n");
+			dos.flush();
+			dos.close();
 			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
             String s = count++ + " OK/n";
-	        BufferedReader in = new BufferedReader(  
-	                            new InputStreamReader(p.getInputStream()));  
-	        String line = null;  
-	        while ((line = in.readLine()) != null) {  
-	            s += line + "/n";                 
-	        }  
+//	        BufferedReader in = new BufferedReader(  
+//	                            new InputStreamReader(p.getInputStream()));  
+//	        String line = null;  
+//	        while ((line = in.readLine()) != null) {  
+//	            s += line + "/n";                 
+//	        }  
+//            in.close();
 
             text.setText(s); 
             Toast.makeText(this, "run ok", 200).show();;
-           
+            
+            
+            
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
